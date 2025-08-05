@@ -17,7 +17,7 @@ class DeclaracaoVariaveisDecimamFormatado
 		Console.WriteLine("Sua quantia = {0:C}", y);
 		Console.WriteLine("Valor de x = R$ {0:F3} e Valor de y = {1:C}",x,y);
 		
-		/* Interpolação de String */
+		/* Interpolação de String C# 6*/
 		/*
 		Console.WriteLine($"Minha quantia = {x:C}");
 		Console.WriteLine($"Sua quantia = {y:C}");
