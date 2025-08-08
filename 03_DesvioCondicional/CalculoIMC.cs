@@ -18,10 +18,12 @@ class CalculoIMC
 		if(imc < 18.5)
 		{
 			Console.WriteLine("Classificação: Abaixo do peso normal, IMC é: {0:F3}", imc);
-		}else if(imc < 25)
+		}
+		else if(imc < 25)
 		{
 			Console.WriteLine("Classificação: Peso Normal, IMC é: {0:F3}", imc);
-		}else
+		}
+		else
 		{
 			Console.WriteLine("Classificação: Acima do peso normal, IMC é: {0:F3}", imc);
 		}		
