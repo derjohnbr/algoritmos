@@ -6,20 +6,34 @@ namespace _06_Tabuada
     {
         static void Main(string[] args)
         {
-            int numero;
+            
             string continuar = "S";
+            
 
             while (continuar.ToUpper() == "S") {
-                Console.WriteLine("Digite um Número");
-                numero = int.Parse(Console.ReadLine());
+                int numero = 0;
+                bool digitacaoValida = false;
+                //Console.WriteLine("Digite um Número");
+                //numero = int.Parse(Console.ReadLine());
 
-                Console.WriteLine("\nTabuada do {0}\n", numero);
-                for (int i = 0; i <= 10; i++)
+                while (!digitacaoValida)
                 {
-                    Console.WriteLine("{0} x {1} = {2}", i, numero, numero * i);
+                    Console.WriteLine("Digite um Número");
+                    digitacaoValida = int.TryParse(Console.ReadLine(), out numero);
+
+                    if (!digitacaoValida)
+                        Console.WriteLine("Valor inválido. Tente novamente.\n");
                 }
 
-                Console.WriteLine("\nDeseja continuar (S/N)");
+                //Console.WriteLine("\nTabuada do {0}\n", numero);
+                Console.WriteLine($"\nTabuada do {numero}\n"); //$ -> Interpolação
+                for (int i = 0; i <= 10; i++)
+                {
+                    //Console.WriteLine("{0} x {1} = {2}", i, numero, numero * i);
+                    Console.WriteLine($"{i} x {numero} = {numero * i}");
+                }
+
+                Console.WriteLine($"\nDeseja continuar (S/N)");
                 continuar = Console.ReadLine();
 
             }
