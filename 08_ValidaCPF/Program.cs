@@ -11,8 +11,10 @@ namespace _08_ValidaCPF
             Console.WriteLine("Digite o CPF:");
             string cpf = Console.ReadLine();
 
+            //Limpeza do CPF
             string cpfLimpo = Regex.Replace(cpf, "[^0-9]", "");
 
+            //TransformaCPF
             char[] cpfVetor = cpfLimpo.ToCharArray();
 
             if (cpfVetor.Length != 11)
@@ -35,8 +37,7 @@ namespace _08_ValidaCPF
             foreach (char i in cpfVetor.Take(cpfVetor.Length - 2))
             {
                 // Console.WriteLine($"Valor: {i}");
-                int digito = int.Parse(i.ToString());
-                somaVetorX = somaVetorX + (digito * x);
+                somaVetorX += (int.Parse(i.ToString()) * x);
                 x -= 1;
             }
             int restoX = somaVetorX % 11;
@@ -61,8 +62,7 @@ namespace _08_ValidaCPF
             foreach (char i in cpfVetor.Take(cpfVetor.Length - 1))
             {
                 // Console.WriteLine($"Valor: {i}");
-                int digito = int.Parse(i.ToString());
-                somaVetorY = somaVetorY + (digito * y);
+                somaVetorY += (int.Parse(i.ToString()) * y);
                 y -= 1;
             }
             int restoY = somaVetorY % 11;
