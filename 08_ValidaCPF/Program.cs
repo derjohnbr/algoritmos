@@ -31,57 +31,48 @@ namespace _08_ValidaCPF
 
             Console.WriteLine($"CPF: {new string(cpfVetor)}");
 
-            //Verificação do primeiro dígito
-            int somaVetorX = 0;
-            int x = 10;
-            foreach (char i in cpfVetor.Take(cpfVetor.Length - 2))
+            int digX = CalcularDigitoVerificador(new string(cpfVetor), 9, 10);
+            if (digX != int.Parse(cpfVetor[9].ToString()))
             {
-                // Console.WriteLine($"Valor: {i}");
-                somaVetorX += (int.Parse(i.ToString()) * x);
-                x -= 1;
-            }
-            int restoX = somaVetorX % 11;
-            if (restoX < 2)
-            {
-                restoX = 0;
-            }
-            else
-            {
-                restoX = (11 - restoX);
-                // Console.WriteLine($"Resto da soma dos dígitos do CPF X {cpfVetor[9]}: {restoX}");
-            }
-            if (restoX != int.Parse(cpfVetor[9].ToString()))
-            {
-                Console.WriteLine($"CPF inválido! Resto: {restoX}");
+                Console.WriteLine($"CPF inválido! Resto: {digX}");
                 return;
             }
 
-            //Verificação do segundo dígito
-            int somaVetorY = 0;
-            int y = 11;
-            foreach (char i in cpfVetor.Take(cpfVetor.Length - 1))
+
+            int digY = CalcularDigitoVerificador(new string(cpfVetor), 10, 11);
+            if (digY != int.Parse(cpfVetor[10].ToString()))
             {
-                // Console.WriteLine($"Valor: {i}");
-                somaVetorY += (int.Parse(i.ToString()) * y);
-                y -= 1;
-            }
-            int restoY = somaVetorY % 11;
-            if (restoY < 2)
-            {
-                restoY = 0;
-            }
-            else
-            {
-                restoY = (11 - restoY);
-                // Console.WriteLine($"Resto da soma dos dígitos do CPF Y: {restoY}");
-            }
-            if (restoY != int.Parse(cpfVetor[10].ToString()))
-            {
-                Console.WriteLine($"CPF inválido! Resto: {restoY}");
+                Console.WriteLine($"CPF inválido! Resto: {digY}");
                 return;
             }
 
             Console.WriteLine($"CPF: {cpf} VÁLIDO!!");
         }
+
+        public static int CalcularDigitoVerificador(string cpf, int qtdNumeros, int peso)
+        {
+            int somaVetor = 0;
+            int dig;
+
+            if (qtdNumeros == 9)
+                dig = 2;
+            else
+                dig = 1;
+
+            foreach (char i in cpf.Take(cpf.Length - dig))
+                {           
+                    somaVetor += (int.Parse(i.ToString()) * peso);
+                    peso -= 1;
+                    qtdNumeros -= 1;
+                }
+            int digito = somaVetor % 11;
+            if (digito < 2)
+                digito = 0;
+            else
+                digito = (11 - digito);
+
+            return digito;
+        }
+
     }
 }
