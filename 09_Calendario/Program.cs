@@ -52,7 +52,7 @@ namespace _09_Calendario
             {
                 for (int diaSemana = 0; diaSemana < 7; diaSemana++)
                 {
-                    Console.Write(calendario[semana, diaSemana].ToString().PadLeft(3) + "\t");
+                    Console.Write(calendario[semana, diaSemana].ToString("00") + "\t");
                 }
                 Console.WriteLine();
             }
