@@ -18,20 +18,7 @@ namespace _09_Calendario
             {
                 Console.Write("Digite o Ano (ex: 2023)");
                 ano = int.Parse(Console.ReadLine());
-            }
-            else if (opcao == 2)
-            {
-                Console.Write("Digite o Mes (ex: 1..12)");
-                mes = int.Parse(Console.ReadLine());
 
-                Console.Write("Digite o Ano (ex: 2023)");
-                ano = int.Parse(Console.ReadLine());
-            }
-            else
-                Console.WriteLine("Opção inválida!");
-
-            if (opcao == 1)
-            {
                 for (mes = 1; mes <= 12; mes++)
                 {
                     int[,] calendario = CriarCalendario(mes, ano);
@@ -41,9 +28,17 @@ namespace _09_Calendario
             }
             else if (opcao == 2)
             {
+                Console.Write("Digite o Mes (ex: 1..12)");
+                mes = int.Parse(Console.ReadLine());
+
+                Console.Write("Digite o Ano (ex: 2023)");
+                ano = int.Parse(Console.ReadLine());
+
                 int[,] calendario = CriarCalendario(mes, ano);
                 ImprimirCalendario(calendario, mes, ano);
             }
+            else
+                Console.WriteLine("Opção inválida!");
 
             Console.ReadKey();
         }
