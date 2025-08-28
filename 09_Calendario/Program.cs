@@ -86,11 +86,14 @@ namespace _09_Calendario
             if (mes == 1)
                 feriados[indice++] = 1; //Confraternização Universal
             else if (mes == 4)
-                feriados[indice++] = 21; //Tiradentes
+            {
+                feriados[indice++] = 4; //Aniverssário de Marília
+                feriados[indice++] = 21;  //Tiradentes
+            }
             else if (mes == 5)
                 feriados[indice++] = 1; //Dia do Trabalho
             else if (mes == 7)
-                feriados[indice++] = 9; 
+                feriados[indice++] = 9;
             else if (mes == 9)
                 feriados[indice++] = 7; //Independência do Brasil
             else if (mes == 10)
@@ -106,24 +109,16 @@ namespace _09_Calendario
 
             DateTime pascoa = DomingoDePascoa(ano);
             if (pascoa.Month == mes)
-            {
                 feriados[indice++] = pascoa.Day; // adiciona o dia da Páscoa
-            }
             DateTime carnaval = pascoa.AddDays(-47);
             if (carnaval.Month == mes)
-            {
                 feriados[indice++] = carnaval.Day; 
-            }
             DateTime sextaSanta = pascoa.AddDays(-2);
             if (sextaSanta.Month == mes)
-            {
                 feriados[indice++] = sextaSanta.Day;
-            }
             DateTime corpusChristi = pascoa.AddDays(60);
             if (corpusChristi.Month == mes)
-            {
                 feriados[indice++] = corpusChristi.Day;
-            }
             //Console.WriteLine($"Pascoa: {pascoa.ToString("dd/MM/yyyy")} Carnaval {carnaval.ToString("dd/MM/yyyy")} " +
             //    $"sextaSanta {sextaSanta.ToString("dd/MM/yyyy")} corpusChristi {corpusChristi.ToString("dd/MM/yyyy")}");
             Array.Sort(feriados);
