@@ -10,32 +10,60 @@ namespace _09_Calendario
     {
         static void Main(string[] args)
         {
-            Console.Write("Digite o Mês (1..12)");
-            int mes = int.Parse(Console.ReadLine());
+            Console.WriteLine("Visualizar Calendário [ 1 - Anual ou 2 - Mensal ] ?");
+            int opcao = int.Parse(Console.ReadLine());
+            int mes = 0, ano = 0;
 
-            Console.Write("Digite o Ano (ex: 2023)");
-            int ano = int.Parse(Console.ReadLine());
+            if (opcao == 1)
+            {
+                Console.Write("Digite o Ano (ex: 2023)");
+                ano = int.Parse(Console.ReadLine());
+            }
+            else if (opcao == 2)
+            {
+                Console.Write("Digite o Mes (ex: 1..12)");
+                mes = int.Parse(Console.ReadLine());
 
-            //Descobre a quantidade de dias de um mês
+                Console.Write("Digite o Ano (ex: 2023)");
+                ano = int.Parse(Console.ReadLine());
+            }
+            else
+                Console.WriteLine("Opção inválida!");
+
+            if (opcao == 1)
+            {
+                for (mes = 1; mes <= 12; mes++)
+                {
+                    int[,] calendario = CriarCalendario(mes, ano);
+                    ImprimirCalendario(calendario, mes, ano);
+                    Console.WriteLine();
+                }
+            }
+            else if (opcao == 2)
+            {
+                int[,] calendario = CriarCalendario(mes, ano);
+                ImprimirCalendario(calendario, mes, ano);
+            }
+
+            Console.ReadKey();
+        }
+
+        static int[,] CriarCalendario(int mes, int ano)
+        {
             int diasDoMes = DateTime.DaysInMonth(ano, mes);
-
-            //Descobre o dia da semana do primeiro dia do mês
-            // 0 = Domingo, 1 = Segunda, ..., 6 = Sábado
             DateTime primeiroDiaMes = new DateTime(ano, mes, 1);
             int diaSemanaInicio = (int)primeiroDiaMes.DayOfWeek;
 
-            //Matriz de 6 semanas e 7 dias
             int[,] calendario = new int[6, 7];
             int dia = 1;
 
-            //Preenche a matriz com os dias do mês
             for (int semana = 0; semana < 6; semana++)
             {
                 for (int diaSemana = 0; diaSemana < 7; diaSemana++)
-                { 
+                {
                     if (semana == 0 && diaSemana < diaSemanaInicio)
                     {
-                        calendario[semana, diaSemana] = 0; // Dias vazios antes do início do mês
+                        calendario[semana, diaSemana] = 0;
                     }
                     else if (dia <= diasDoMes)
                     {
@@ -44,38 +72,41 @@ namespace _09_Calendario
                     }
                 }
             }
+            return calendario;
+        }
 
-            Console.WriteLine($"\nCanlendário de {primeiroDiaMes.ToString("MMMM")} de {ano}");
+        static void ImprimirCalendario(int[,] calendario, int mes, int ano)
+        {
+            DateTime primeiroDiaMes = new DateTime(ano, mes, 1);
+            Console.WriteLine($"\nCalendário de {primeiroDiaMes.ToString("MMMM")} de {ano}");
             Console.WriteLine($"\nDom\tSeg\tTer\tQua\tQui\tSex\tSab");
 
             int[] diasFeriados = RetornaFeriados(mes, ano);
-            
-            //Imprimir o calendário
+
             for (int semana = 0; semana < 6; semana++)
             {
                 for (int diaSemana = 0; diaSemana < 7; diaSemana++)
                 {
-                    if(diasFeriados.Contains(calendario[semana, diaSemana]) || diaSemana == 0)
+                    if (diasFeriados.Contains(calendario[semana, diaSemana]) || diaSemana == 0)
                         Console.ForegroundColor = ConsoleColor.Red;
 
                     int diaCalendario = calendario[semana, diaSemana];
                     Console.Write((diaCalendario == 0 ? "  " : diaCalendario.ToString("00")) + "\t");
-                    
+
                     Console.ResetColor();
                 }
                 Console.WriteLine();
             }
 
-            int[] feriados = RetornaFeriados(mes, ano);
             Console.Write($"\nFeriados: ");
-            for (int i = 0; i < feriados.Length; i++)
+            foreach (var feriado in diasFeriados)
             {
-                if (feriados[i] != 0)
-                    Console.Write(feriados[i].ToString("00") + "\t");
+                if (feriado != 0)
+                    Console.Write(feriado.ToString("00") + "\t");
             }
-
-            Console.ReadKey();
         }
+
+
 
         public static int[] RetornaFeriados(int mes, int ano)
         {
