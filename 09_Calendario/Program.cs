@@ -12,13 +12,14 @@ namespace _09_Calendario
         {
             Console.WriteLine("Visualizar Calendário [ 1 - Anual ou 2 - Mensal ] ?");
             int opcao = int.Parse(Console.ReadLine());
+
             int mes = 0, ano = 0;
+
+            Console.Write("Digite o Ano (ex: 2023)");
+            ano = int.Parse(Console.ReadLine());
 
             if (opcao == 1)
             {
-                Console.Write("Digite o Ano (ex: 2023)");
-                ano = int.Parse(Console.ReadLine());
-
                 for (mes = 1; mes <= 12; mes++)
                 {
                     int[,] calendario = CriarCalendario(mes, ano);
@@ -30,9 +31,6 @@ namespace _09_Calendario
             {
                 Console.Write("Digite o Mes (ex: 1..12)");
                 mes = int.Parse(Console.ReadLine());
-
-                Console.Write("Digite o Ano (ex: 2023)");
-                ano = int.Parse(Console.ReadLine());
 
                 int[,] calendario = CriarCalendario(mes, ano);
                 ImprimirCalendario(calendario, mes, ano);
@@ -100,8 +98,6 @@ namespace _09_Calendario
                     Console.Write(feriado.ToString("00") + "\t");
             }
         }
-
-
 
         public static int[] RetornaFeriados(int mes, int ano)
         {
